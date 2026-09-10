@@ -24,11 +24,11 @@ export default function DomainPage() {
   const getDomainIcon = () => {
     switch (formattedDomain) {
       case "Climate":
-        return <Wind className="w-5 h-5 text-sky-600" />;
+        return <Wind className="h-5 w-5 text-sky-600" />;
       case "Energy":
-        return <Flame className="w-5 h-5 text-amber-600" />;
+        return <Flame className="h-5 w-5 text-amber-600" />;
       case "Power":
-        return <Zap className="w-5 h-5 text-yellow-600" />;
+        return <Zap className="h-5 w-5 text-yellow-600" />;
       default:
         return null;
     }
@@ -37,23 +37,23 @@ export default function DomainPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Domain Header */}
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 py-9 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 bg-slate-50">
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-9 lg:px-8">
+          <div className="flex items-start gap-3 sm:items-center sm:gap-4">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50">
               {getDomainIcon()}
             </div>
 
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-medium text-slate-500">Sector</p>
 
-              <h1 className="mt-0.5 text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+              <h1 className="mt-0.5 break-words text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
                 {formattedDomain} datasets
               </h1>
             </div>
           </div>
 
-          <p className="max-w-2xl mt-4 text-sm leading-6 text-slate-500">
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:mt-4">
             Showing all approved visualizations categorized under{" "}
             {formattedDomain}.
           </p>
@@ -61,20 +61,20 @@ export default function DomainPage() {
       </section>
 
       {/* Visualizations */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-24">
-            <div className="w-8 h-8 border-2 border-slate-200 border-t-emerald-600 rounded-full animate-spin" />
+          <div className="flex flex-col items-center justify-center px-4 py-20 sm:py-24">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-200 border-t-emerald-600" />
 
-            <p className="mt-4 text-sm text-slate-500">
+            <p className="mt-4 text-center text-sm text-slate-500">
               Loading {formattedDomain} data...
             </p>
           </div>
         ) : datasets.length === 0 ? (
-          <div className="flex justify-center py-16">
-            <div className="w-full max-w-lg bg-white border border-slate-200 rounded-lg p-10 text-center">
-              <div className="flex items-center justify-center w-12 h-12 mx-auto mb-5 rounded-lg bg-slate-100">
-                <Database className="w-6 h-6 text-slate-500" />
+          <div className="flex justify-center px-0 py-10 sm:py-16">
+            <div className="w-full max-w-lg rounded-lg border border-slate-200 bg-white p-6 text-center sm:p-10">
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100">
+                <Database className="h-6 w-6 text-slate-500" />
               </div>
 
               <h3 className="text-lg font-semibold text-slate-900">
@@ -87,7 +87,7 @@ export default function DomainPage() {
             </div>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             {datasets.map((dataset) => (
               <DynamicVisualizer key={dataset._id} dataset={dataset} />
             ))}

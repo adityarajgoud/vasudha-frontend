@@ -19,19 +19,19 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero Header */}
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:px-8">
           <div className="max-w-4xl">
-            <div className="flex items-center gap-2 mb-4 text-sm font-medium text-emerald-700">
-              <Globe2 className="w-4 h-4" />
+            <div className="mb-3 flex items-center gap-2 text-sm font-medium text-emerald-700 sm:mb-4">
+              <Globe2 className="h-4 w-4 shrink-0" />
               <span>Vasudha Open Data Initiative</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900">
+            <h1 className="text-2xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
               India climate, energy and power visualizations
             </h1>
 
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:mt-4 sm:text-base sm:leading-7">
               Explore interactive geospatial, state-level and time-series
               visualizations based on datasets verified and approved by
               researchers at Vasudha Foundation.
@@ -41,20 +41,20 @@ export default function Home() {
       </section>
 
       {/* Dynamic Ordered Visualizations Feed */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-24">
-            <div className="w-8 h-8 border-2 border-slate-200 border-t-emerald-600 rounded-full animate-spin" />
+          <div className="flex flex-col items-center justify-center px-4 py-20 sm:py-24">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-200 border-t-emerald-600" />
 
-            <p className="mt-4 text-sm text-slate-500">
+            <p className="mt-4 text-center text-sm text-slate-500">
               Loading published visualizations...
             </p>
           </div>
         ) : datasets.length === 0 ? (
-          <div className="flex justify-center py-16">
-            <div className="w-full max-w-lg bg-white border border-slate-200 rounded-lg p-10 text-center">
-              <div className="flex items-center justify-center w-12 h-12 mx-auto mb-5 rounded-lg bg-slate-100">
-                <Database className="w-6 h-6 text-slate-500" />
+          <div className="flex justify-center px-0 py-10 sm:py-16">
+            <div className="w-full max-w-lg rounded-lg border border-slate-200 bg-white p-6 text-center sm:p-10">
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100">
+                <Database className="h-6 w-6 text-slate-500" />
               </div>
 
               <h3 className="text-lg font-semibold text-slate-900">
@@ -69,7 +69,7 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             {datasets.map((dataset) => (
               <DynamicVisualizer key={dataset._id} dataset={dataset} />
             ))}

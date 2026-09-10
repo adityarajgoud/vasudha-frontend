@@ -15,9 +15,10 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen font-sans bg-slate-50 text-slate-900">
+        <div className="flex min-h-screen flex-col bg-slate-50 font-sans text-slate-900">
           <Navbar />
-          <div className="flex-1">
+
+          <div className="min-w-0 flex-1">
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
@@ -48,7 +49,7 @@ export default function App() {
             </Routes>
           </div>
 
-          <footer className="py-6 text-xs text-center bg-white border-t border-slate-200 text-slate-400">
+          <footer className="border-t border-slate-200 bg-white px-4 py-5 text-center text-xs text-slate-400 sm:py-6">
             &copy; {new Date().getFullYear()} Vasudha Foundation. Full-Stack
             Data Platform Assessment.
           </footer>
@@ -61,8 +62,10 @@ export default function App() {
 // Helper wrapper to restrict dynamic domain route strictly to climate, energy, and power
 function DomainWrapper() {
   const path = window.location.pathname.toLowerCase().replace("/", "");
+
   if (["climate", "energy", "power"].includes(path)) {
     return <DomainPage />;
   }
+
   return <Navigate to="/" replace />;
 }

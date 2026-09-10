@@ -145,16 +145,16 @@ export default function SuperAdminDashboard() {
 
   return (
     <div className="min-h-[calc(100vh-64px)] bg-slate-50">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         {/* Header */}
-        <div className="mb-7 flex flex-col gap-5 border-b border-slate-200 pb-6 lg:flex-row lg:items-end lg:justify-between">
-          <div>
+        <div className="mb-6 flex flex-col gap-5 border-b border-slate-200 pb-5 sm:mb-7 sm:pb-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="min-w-0">
             <div className="mb-1 flex items-center gap-2 text-sm font-medium text-indigo-600">
-              <ShieldCheck className="h-4 w-4" />
+              <ShieldCheck className="h-4 w-4 shrink-0" />
               Administration
             </div>
 
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+            <h1 className="break-words text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
               Super admin dashboard
             </h1>
 
@@ -164,36 +164,36 @@ export default function SuperAdminDashboard() {
           </div>
 
           {/* Tabs */}
-          <div className="flex w-full border-b border-slate-200 lg:w-auto lg:border-b-0">
+          <div className="flex w-full overflow-x-auto border-b border-slate-200 lg:w-auto lg:border-b-0">
             <button
               onClick={() => setActiveTab("datasets")}
-              className={`relative flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm transition lg:flex-none ${
+              className={`relative flex min-w-0 flex-1 items-center justify-center gap-1.5 px-3 py-3 text-sm transition sm:gap-2 sm:px-4 lg:flex-none ${
                 activeTab === "datasets"
                   ? "font-medium text-indigo-700"
                   : "text-slate-500 hover:text-slate-900"
               }`}
             >
-              <Layers className="h-4 w-4" />
-              Datasets
+              <Layers className="h-4 w-4 shrink-0" />
+              <span>Datasets</span>
               <span className="text-xs text-slate-400">{datasets.length}</span>
               {activeTab === "datasets" && (
-                <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-indigo-600" />
+                <span className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-indigo-600 sm:left-3 sm:right-3" />
               )}
             </button>
 
             <button
               onClick={() => setActiveTab("admins")}
-              className={`relative flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm transition lg:flex-none ${
+              className={`relative flex min-w-0 flex-1 items-center justify-center gap-1.5 px-3 py-3 text-sm transition sm:gap-2 sm:px-4 lg:flex-none ${
                 activeTab === "admins"
                   ? "font-medium text-indigo-700"
                   : "text-slate-500 hover:text-slate-900"
               }`}
             >
-              <Users className="h-4 w-4" />
-              Admins
+              <Users className="h-4 w-4 shrink-0" />
+              <span>Admins</span>
               <span className="text-xs text-slate-400">{admins.length}</span>
               {activeTab === "admins" && (
-                <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-indigo-600" />
+                <span className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-indigo-600 sm:left-3 sm:right-3" />
               )}
             </button>
           </div>
@@ -201,57 +201,57 @@ export default function SuperAdminDashboard() {
 
         {/* Loading */}
         {loading ? (
-          <div className="flex min-h-[360px] items-center justify-center">
+          <div className="flex min-h-[300px] items-center justify-center px-4 sm:min-h-[360px]">
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-200 border-t-indigo-600" />
+              <div className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-slate-200 border-t-indigo-600" />
               Loading records...
             </div>
           </div>
         ) : activeTab === "datasets" ? (
           /* Dataset approval */
           <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-            <div className="flex flex-col gap-2 border-b border-slate-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
+            <div className="flex flex-col gap-2 border-b border-slate-200 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+              <div className="min-w-0">
                 <h2 className="text-base font-semibold text-slate-900">
                   Submitted datasets
                 </h2>
 
-                <p className="mt-0.5 text-xs text-slate-500">
+                <p className="mt-0.5 text-xs leading-5 text-slate-500">
                   Review and manage datasets submitted by administrators.
                 </p>
               </div>
 
-              <span className="text-sm text-slate-500">
+              <span className="shrink-0 text-sm text-slate-500">
                 {datasets.length}{" "}
                 {datasets.length === 1 ? "dataset" : "datasets"}
               </span>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
+            <div className="w-full overflow-x-auto">
+              <table className="w-full min-w-[900px] text-left">
                 <thead>
                   <tr className="border-b border-slate-200 bg-slate-50">
-                    <th className="whitespace-nowrap px-5 py-3 text-xs font-medium text-slate-500">
+                    <th className="whitespace-nowrap px-4 py-3 text-xs font-medium text-slate-500 sm:px-5">
                       Chart title
                     </th>
 
-                    <th className="whitespace-nowrap px-5 py-3 text-xs font-medium text-slate-500">
+                    <th className="whitespace-nowrap px-4 py-3 text-xs font-medium text-slate-500 sm:px-5">
                       Domain
                     </th>
 
-                    <th className="whitespace-nowrap px-5 py-3 text-xs font-medium text-slate-500">
+                    <th className="whitespace-nowrap px-4 py-3 text-xs font-medium text-slate-500 sm:px-5">
                       Submitted by
                     </th>
 
-                    <th className="whitespace-nowrap px-5 py-3 text-xs font-medium text-slate-500">
+                    <th className="whitespace-nowrap px-4 py-3 text-xs font-medium text-slate-500 sm:px-5">
                       Status
                     </th>
 
-                    <th className="whitespace-nowrap px-5 py-3 text-center text-xs font-medium text-slate-500">
+                    <th className="whitespace-nowrap px-4 py-3 text-center text-xs font-medium text-slate-500 sm:px-5">
                       Review
                     </th>
 
-                    <th className="whitespace-nowrap px-5 py-3 text-right text-xs font-medium text-slate-500">
+                    <th className="whitespace-nowrap px-4 py-3 text-right text-xs font-medium text-slate-500 sm:px-5">
                       Actions
                     </th>
                   </tr>
@@ -264,62 +264,62 @@ export default function SuperAdminDashboard() {
                       className="transition-colors hover:bg-slate-50"
                     >
                       {/* Title */}
-                      <td className="px-5 py-4">
+                      <td className="px-4 py-4 sm:px-5">
                         <div className="max-w-xs">
                           <p className="truncate text-sm font-medium text-slate-800">
                             {item.title}
                           </p>
 
-                          <p className="mt-1 text-xs text-slate-400">
+                          <p className="mt-1 break-words text-xs text-slate-400">
                             {item.chartType}
                           </p>
                         </div>
                       </td>
 
                       {/* Domain */}
-                      <td className="px-5 py-4">
+                      <td className="px-4 py-4 sm:px-5">
                         <span className="text-sm text-slate-600">
                           {item.domain}
                         </span>
                       </td>
 
                       {/* Submitted by */}
-                      <td className="px-5 py-4">
+                      <td className="px-4 py-4 sm:px-5">
                         <p className="text-sm font-medium text-slate-700">
                           {item.submittedBy?.name || "Admin"}
                         </p>
 
-                        <p className="mt-0.5 text-xs text-slate-400">
+                        <p className="mt-0.5 break-all text-xs text-slate-400">
                           {item.submittedBy?.email}
                         </p>
                       </td>
 
                       {/* Status */}
-                      <td className="px-5 py-4">
+                      <td className="px-4 py-4 sm:px-5">
                         {item.status === "APPROVED" && (
-                          <span className="inline-flex items-center gap-1.5 rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
-                            <CheckCircle2 className="h-3.5 w-3.5" />
+                          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
+                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                             Published
                           </span>
                         )}
 
                         {item.status === "REJECTED" && (
-                          <span className="inline-flex items-center gap-1.5 rounded-md border border-red-200 bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700">
-                            <XCircle className="h-3.5 w-3.5" />
+                          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border border-red-200 bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700">
+                            <XCircle className="h-3.5 w-3.5 shrink-0" />
                             Rejected
                           </span>
                         )}
 
                         {item.status === "PENDING" && (
-                          <span className="inline-flex items-center gap-1.5 rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700">
-                            <Clock className="h-3.5 w-3.5" />
+                          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700">
+                            <Clock className="h-3.5 w-3.5 shrink-0" />
                             Pending
                           </span>
                         )}
                       </td>
 
                       {/* Review */}
-                      <td className="px-5 py-4 text-center">
+                      <td className="px-4 py-4 text-center sm:px-5">
                         <div className="inline-flex items-center gap-2">
                           {item.status !== "APPROVED" && (
                             <button
@@ -346,7 +346,7 @@ export default function SuperAdminDashboard() {
                       </td>
 
                       {/* Manage */}
-                      <td className="px-5 py-4 text-right">
+                      <td className="px-4 py-4 text-right sm:px-5">
                         <div className="inline-flex items-center gap-1">
                           <button
                             onClick={() => {
@@ -377,16 +377,16 @@ export default function SuperAdminDashboard() {
           </div>
         ) : (
           /* Manage admins */
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-6">
             {/* Create admin */}
             <div className="h-fit rounded-lg border border-slate-200 bg-white shadow-sm">
-              <div className="border-b border-slate-200 px-5 py-4">
+              <div className="border-b border-slate-200 px-4 py-4 sm:px-5">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">
                     <UserPlus className="h-4 w-4" />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="text-sm font-semibold text-slate-900">
                       Create admin
                     </h2>
@@ -398,7 +398,7 @@ export default function SuperAdminDashboard() {
                 </div>
               </div>
 
-              <div className="px-5 py-5">
+              <div className="px-4 py-5 sm:px-5">
                 {userMsg.text && (
                   <div
                     className={`mb-5 flex items-start gap-2.5 rounded-md border px-3.5 py-3 text-sm ${
@@ -413,7 +413,7 @@ export default function SuperAdminDashboard() {
                       <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
                     )}
 
-                    <span>{userMsg.text}</span>
+                    <span className="min-w-0 break-words">{userMsg.text}</span>
                   </div>
                 )}
 
@@ -428,7 +428,7 @@ export default function SuperAdminDashboard() {
                       required
                       value={adminName}
                       onChange={(e) => setAdminName(e.target.value)}
-                      placeholder="Ajay Analyst"
+                      placeholder="Aditya Sharma"
                       className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-100"
                     />
                   </div>
@@ -477,8 +477,8 @@ export default function SuperAdminDashboard() {
 
             {/* Admin accounts */}
             <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm lg:col-span-2">
-              <div className="flex flex-col gap-2 border-b border-slate-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
+              <div className="flex flex-col gap-2 border-b border-slate-200 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+                <div className="min-w-0">
                   <h2 className="text-base font-semibold text-slate-900">
                     Admin accounts
                   </h2>
@@ -488,28 +488,28 @@ export default function SuperAdminDashboard() {
                   </p>
                 </div>
 
-                <span className="text-sm text-slate-500">
+                <span className="shrink-0 text-sm text-slate-500">
                   {admins.length} {admins.length === 1 ? "account" : "accounts"}
                 </span>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
+              <div className="w-full overflow-x-auto">
+                <table className="w-full min-w-[650px] text-left">
                   <thead>
                     <tr className="border-b border-slate-200 bg-slate-50">
-                      <th className="whitespace-nowrap px-5 py-3 text-xs font-medium text-slate-500">
+                      <th className="whitespace-nowrap px-4 py-3 text-xs font-medium text-slate-500 sm:px-5">
                         Name and email
                       </th>
 
-                      <th className="whitespace-nowrap px-5 py-3 text-xs font-medium text-slate-500">
+                      <th className="whitespace-nowrap px-4 py-3 text-xs font-medium text-slate-500 sm:px-5">
                         Status
                       </th>
 
-                      <th className="whitespace-nowrap px-5 py-3 text-center text-xs font-medium text-slate-500">
+                      <th className="whitespace-nowrap px-4 py-3 text-center text-xs font-medium text-slate-500 sm:px-5">
                         Access
                       </th>
 
-                      <th className="whitespace-nowrap px-5 py-3 text-right text-xs font-medium text-slate-500">
+                      <th className="whitespace-nowrap px-4 py-3 text-right text-xs font-medium text-slate-500 sm:px-5">
                         Actions
                       </th>
                     </tr>
@@ -521,31 +521,31 @@ export default function SuperAdminDashboard() {
                         key={adm._id}
                         className="transition-colors hover:bg-slate-50"
                       >
-                        <td className="px-5 py-4">
+                        <td className="px-4 py-4 sm:px-5">
                           <p className="text-sm font-medium text-slate-800">
                             {adm.name}
                           </p>
 
-                          <p className="mt-1 text-xs text-slate-400">
+                          <p className="mt-1 break-all text-xs text-slate-400">
                             {adm.email}
                           </p>
                         </td>
 
-                        <td className="px-5 py-4">
+                        <td className="px-4 py-4 sm:px-5">
                           {adm.isActive ? (
-                            <span className="inline-flex items-center gap-1.5 text-sm text-emerald-700">
-                              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                            <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm text-emerald-700">
+                              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                               Active
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1.5 text-sm text-slate-500">
-                              <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                            <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm text-slate-500">
+                              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
                               Disabled
                             </span>
                           )}
                         </td>
 
-                        <td className="px-5 py-4 text-center">
+                        <td className="px-4 py-4 text-center sm:px-5">
                           <button
                             onClick={() => handleToggleAdminStatus(adm._id)}
                             className={`inline-flex rounded-md border p-2 transition ${
@@ -561,7 +561,7 @@ export default function SuperAdminDashboard() {
                           </button>
                         </td>
 
-                        <td className="px-5 py-4 text-right">
+                        <td className="px-4 py-4 text-right sm:px-5">
                           <button
                             onClick={() => handleDeleteAdmin(adm._id)}
                             className="rounded-md p-2 text-slate-400 transition hover:bg-red-50 hover:text-red-600"
@@ -581,11 +581,11 @@ export default function SuperAdminDashboard() {
 
         {/* Edit Dataset Modal */}
         {editingDataset && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 px-4">
-            <div className="w-full max-w-md overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
+          <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/40 px-3 py-4 sm:items-center sm:px-4 sm:py-6">
+            <div className="my-auto max-h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-xl sm:max-h-[calc(100vh-3rem)]">
               {/* Modal header */}
-              <div className="flex items-start justify-between border-b border-slate-200 px-6 py-5">
-                <div>
+              <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-4 py-4 sm:px-6 sm:py-5">
+                <div className="min-w-0">
                   <h3 className="text-lg font-semibold text-slate-900">
                     Edit dataset
                   </h3>
@@ -598,7 +598,7 @@ export default function SuperAdminDashboard() {
                 <button
                   type="button"
                   onClick={() => setEditingDataset(null)}
-                  className="rounded-md p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                  className="shrink-0 rounded-md p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
                   aria-label="Close"
                 >
                   <XCircle className="h-5 w-5" />
@@ -607,7 +607,7 @@ export default function SuperAdminDashboard() {
 
               <form
                 onSubmit={handleSaveDatasetEdit}
-                className="space-y-5 px-6 py-5"
+                className="space-y-5 px-4 py-5 sm:px-6"
               >
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-slate-700">
@@ -639,18 +639,18 @@ export default function SuperAdminDashboard() {
                   </select>
                 </div>
 
-                <div className="flex justify-end gap-3 border-t border-slate-200 pt-5">
+                <div className="flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end">
                   <button
                     type="button"
                     onClick={() => setEditingDataset(null)}
-                    className="rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                    className="w-full rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 sm:w-auto"
                   >
                     Cancel
                   </button>
 
                   <button
                     type="submit"
-                    className="rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="w-full rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                   >
                     Save changes
                   </button>
