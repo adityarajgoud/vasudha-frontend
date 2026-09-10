@@ -19,17 +19,25 @@ export default function DynamicVisualizer({ dataset }) {
   };
 
   return (
-    <div className="p-6 transition-shadow bg-white border shadow-sm rounded-2xl border-slate-200 hover:shadow-md">
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-        <div>
+    <div className="w-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5 lg:p-6">
+      {/* Header */}
+      <div className="mb-4 flex flex-col gap-3 border-b border-slate-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
           <span
-            className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full border mb-1.5 ${getDomainBadge(dataset.domain)}`}
+            className={`mb-1.5 inline-flex max-w-full items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${getDomainBadge(
+              dataset.domain,
+            )}`}
           >
-            <Tag className="w-3 h-3" /> {dataset.domain}
+            <Tag className="h-3 w-3 shrink-0" />
+            <span className="truncate">{dataset.domain}</span>
           </span>
-          <h3 className="text-lg font-bold text-slate-800">{dataset.title}</h3>
+
+          <h3 className="break-words text-base font-bold text-slate-800 sm:text-lg">
+            {dataset.title}
+          </h3>
         </div>
-        <span className="text-xs font-medium text-slate-400">
+
+        <span className="shrink-0 text-xs font-medium text-slate-400 sm:text-right">
           {new Date(dataset.approvedAt || dataset.createdAt).toLocaleDateString(
             undefined,
             {
@@ -41,13 +49,20 @@ export default function DynamicVisualizer({ dataset }) {
         </span>
       </div>
 
-      {dataset.chartType === "lat_long_map" && <LatLngMap dataset={dataset} />}
-      {dataset.chartType === "state_heatmap" && (
-        <StateHeatmap dataset={dataset} />
-      )}
-      {["line", "bar", "area"].includes(dataset.chartType) && (
-        <TimeSeriesChart dataset={dataset} />
-      )}
+      {/* Visualization */}
+      <div className="w-full min-w-0 overflow-x-auto">
+        {dataset.chartType === "lat_long_map" && (
+          <LatLngMap dataset={dataset} />
+        )}
+
+        {dataset.chartType === "state_heatmap" && (
+          <StateHeatmap dataset={dataset} />
+        )}
+
+        {["line", "bar", "area"].includes(dataset.chartType) && (
+          <TimeSeriesChart dataset={dataset} />
+        )}
+      </div>
     </div>
   );
 }

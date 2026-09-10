@@ -7,12 +7,12 @@ export default function LatLngMap({ dataset }) {
   const defaultCenter = [22.5937, 78.9629];
 
   return (
-    <div className="h-[420px] w-full rounded-xl overflow-hidden border border-slate-200 shadow-inner">
+    <div className="h-[300px] w-full overflow-hidden rounded-lg border border-slate-200 shadow-inner sm:h-[360px] sm:rounded-xl md:h-[420px]">
       <MapContainer
         center={defaultCenter}
         zoom={5}
         scrollWheelZoom={false}
-        className="w-full h-full"
+        className="h-full w-full"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -24,6 +24,7 @@ export default function LatLngMap({ dataset }) {
           const lng = Number(
             item.lng || item.Longitude || item.LONGITUDE || item.LON,
           );
+
           const metricKey = Object.keys(item).find(
             (k) =>
               ![
@@ -36,6 +37,7 @@ export default function LatLngMap({ dataset }) {
                 "LON",
               ].includes(k),
           );
+
           const val = metricKey ? item[metricKey] : "N/A";
 
           if (isNaN(lat) || isNaN(lng)) return null;
@@ -53,17 +55,19 @@ export default function LatLngMap({ dataset }) {
               }}
             >
               <Popup>
-                <div className="text-xs space-y-1 font-sans">
-                  <div className="font-bold text-slate-800 text-sm">
+                <div className="space-y-1 text-xs font-sans">
+                  <div className="text-sm font-bold text-slate-800">
                     {dataset.title}
                   </div>
+
                   <div className="text-slate-600">
                     <span className="font-medium">Coordinates:</span>{" "}
                     {lat.toFixed(3)}, {lng.toFixed(3)}
                   </div>
+
                   {metricKey && (
-                    <div className="text-emerald-700 font-semibold">
-                      <span className="text-slate-600 capitalize">
+                    <div className="font-semibold text-emerald-700">
+                      <span className="capitalize text-slate-600">
                         {metricKey}:
                       </span>{" "}
                       {val}

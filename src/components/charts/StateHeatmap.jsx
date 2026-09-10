@@ -20,8 +20,11 @@ export default function StateHeatmap({ dataset }) {
     const rawState = (row.state || row.State || "")
       .toLowerCase()
       .replace(/[^a-z0-9]/g, "");
+
     const val = Number(row.value || row.Value || 0);
+
     stateValues[rawState] = val;
+
     if (val < minVal) minVal = val;
     if (val > maxVal) maxVal = val;
   });
@@ -32,8 +35,10 @@ export default function StateHeatmap({ dataset }) {
   // Dynamic green-gradient generator
   const getColor = (d) => {
     if (d === undefined) return "#e2e8f0";
+
     const range = maxVal - minVal || 1;
     const normalized = (d - minVal) / range;
+
     return normalized > 0.8
       ? "#14532d"
       : normalized > 0.6
@@ -73,6 +78,7 @@ export default function StateHeatmap({ dataset }) {
       feature.properties.NAME_1 ||
       feature.properties.state_name ||
       "State";
+
     const featKey = stateName.toLowerCase().replace(/[^a-z0-9]/g, "");
     const value = stateValues[featKey];
 
@@ -86,17 +92,18 @@ export default function StateHeatmap({ dataset }) {
   };
 
   return (
-    <div className="h-[440px] w-full rounded-xl overflow-hidden border border-slate-200 shadow-inner relative">
+    <div className="relative h-[300px] w-full overflow-hidden rounded-lg border border-slate-200 shadow-inner sm:h-[360px] sm:rounded-xl md:h-[440px]">
       <MapContainer
         center={[22.9734, 78.6569]}
         zoom={4.4}
         scrollWheelZoom={false}
-        className="w-full h-full"
+        className="h-full w-full"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
         {geoData && (
           <GeoJSON
             key={dataset._id}
