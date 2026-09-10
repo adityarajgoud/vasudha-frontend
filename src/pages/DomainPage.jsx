@@ -24,11 +24,11 @@ export default function DomainPage() {
   const getDomainIcon = () => {
     switch (formattedDomain) {
       case "Climate":
-        return <Wind className="w-6 h-6 text-sky-500" />;
+        return <Wind className="w-5 h-5 text-sky-600" />;
       case "Energy":
-        return <Flame className="w-6 h-6 text-amber-500" />;
+        return <Flame className="w-5 h-5 text-amber-600" />;
       case "Power":
-        return <Zap className="w-6 h-6 text-yellow-500" />;
+        return <Zap className="w-5 h-5 text-yellow-600" />;
       default:
         return null;
     }
@@ -36,48 +36,58 @@ export default function DomainPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <section className="py-10 bg-white border-b border-slate-200">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 shadow-sm">
+      {/* Domain Header */}
+      <section className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 py-9 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 bg-slate-50">
               {getDomainIcon()}
             </div>
+
             <div>
-              <span className="text-xs font-semibold tracking-wider uppercase text-slate-400">
-                Sector Focus
-              </span>
-              <h1 className="text-2xl font-bold sm:text-3xl text-slate-900">
-                {formattedDomain} Datasets
+              <p className="text-sm font-medium text-slate-500">Sector</p>
+
+              <h1 className="mt-0.5 text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+                {formattedDomain} datasets
               </h1>
             </div>
           </div>
-          <p className="max-w-2xl mt-2 text-sm text-slate-500">
+
+          <p className="max-w-2xl mt-4 text-sm leading-6 text-slate-500">
             Showing all approved visualizations categorized under{" "}
             {formattedDomain}.
           </p>
         </div>
       </section>
 
-      <main className="px-4 py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      {/* Visualizations */}
+      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {loading ? (
-          <div className="py-24 text-center">
-            <div className="w-10 h-10 mx-auto mb-4 border-4 rounded-full border-emerald-600 border-t-transparent animate-spin"></div>
-            <p className="text-sm font-medium text-slate-500">
+          <div className="flex flex-col items-center justify-center py-24">
+            <div className="w-8 h-8 border-2 border-slate-200 border-t-emerald-600 rounded-full animate-spin" />
+
+            <p className="mt-4 text-sm text-slate-500">
               Loading {formattedDomain} data...
             </p>
           </div>
         ) : datasets.length === 0 ? (
-          <div className="max-w-md p-12 mx-auto my-12 text-center bg-white border rounded-2xl border-slate-200">
-            <Database className="w-12 h-12 mx-auto mb-3 text-slate-300" />
-            <h3 className="text-base font-bold text-slate-800">
-              No {formattedDomain} Visualizations
-            </h3>
-            <p className="mt-1 text-xs text-slate-500">
-              There are currently no approved visualizations in this domain.
-            </p>
+          <div className="flex justify-center py-16">
+            <div className="w-full max-w-lg bg-white border border-slate-200 rounded-lg p-10 text-center">
+              <div className="flex items-center justify-center w-12 h-12 mx-auto mb-5 rounded-lg bg-slate-100">
+                <Database className="w-6 h-6 text-slate-500" />
+              </div>
+
+              <h3 className="text-lg font-semibold text-slate-900">
+                No {formattedDomain} visualizations
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                There are currently no approved visualizations in this domain.
+              </p>
+            </div>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-6">
             {datasets.map((dataset) => (
               <DynamicVisualizer key={dataset._id} dataset={dataset} />
             ))}
