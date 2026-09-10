@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
-
+import DomainPage from "./pages/DomainPage";
+import AdminDashboard from "./pages/AdminDashboard";
 export default function App() {
   return (
     <BrowserRouter>
